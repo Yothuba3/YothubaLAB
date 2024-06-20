@@ -4,13 +4,13 @@
 
 #ifndef SHADERGRAPH_PREVIEW
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
-#endif
 #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
 #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
 #pragma multi_compile _ _ADDITIONAL_LIGHT_SHADOWS
 #pragma multi_compile _ _SHADOWS_SOFT
+#endif
 
-void ReceiveShadow_float(float shadowAlpha,float3 worldPos, out half shadowAttenuation)
+void ReceiveShadow_half(float shadowAlpha,float3 worldPos, out half shadowAttenuation)
 {
     #ifdef SHADERGRAPH_PREVIEW
     shadowAttenuation = 1.0;
@@ -28,7 +28,7 @@ void ReceiveShadow_float(float shadowAlpha,float3 worldPos, out half shadowAtten
     }
     
     
-    shadowAttenuation = shadow;
+    shadowAttenuation = shadow * shadowAlpha;
     #endif
    
 }
